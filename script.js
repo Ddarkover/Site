@@ -1,70 +1,91 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
-  fetchAndDisplay('ipv4', 'https://api.ipify.org?format=json');
-  fetchAndDisplay('ipv6', 'https://api64.ipify.org?format=json');
+  // сначала IPv4 и IPv6
+  fetchIP('ipv4', 'https://api.ipify.org?format=json')
+    .then(ip => {
+      setText('ipv4', ip);
+      return loadDetails(ip);
+    })
+    .then(() => fetchIP('ipv6', 'https://api64.ipify.org?format=json').then(ip => setText('ipv6', ip)))
+    .catch(console.error);
+
+  // устройство / браузер / ОС / экран / соединение
+  const ua = navigator.userAgent;
+  setText('ua', ua);
+  setText('resolution', `${screen.width}×${screen.height}`);
+  const conn = navigator.connection?.effectiveType || 'не поддерживается';
+  setText('connection', conn);
+
+  // WebRTC Leak Test
+  rtcLeak().then(ips => {
+    setText('webrtc', ips.length ? ips.join(', ') : 'не выявлено');
+  });
 });
 
-async function fetchAndDisplay(type, apiUrl) {
-  const el = document.getElementById(type);
-  try {
-    const res = await fetch(apiUrl);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const { ip } = await res.json();
-    el.textContent = ip;
-    // Для IPv4 запросим всю гео-информацию
-    if (type === 'ipv4') {
-      fetchGeoInfo(ip);
-    }
-  } catch (err) {
-    el.textContent = `Ошибка: ${err.message}`;
+function setText(id, txt) {
+  document.getElementById(id).textContent = txt;
+}
+
+async function fetchIP(id, url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(res.statusText);
+  const { ip } = await res.json();
+  return ip;
+}
+
+async function loadDetails(ip) {
+  // ipwho.is возвращает и данные о локации, и threat, и ASN, и currency, и timezone, и coords, и hostname
+  const url = `https://ipwho.is/${ip}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(res.statusText);
+  const data = await res.json();
+  // базовые поля
+  setText('country', data.country);
+  setText('country_code', data.country_code);
+  setText('continent', data.continent);
+  setText('continent_code', data.continent_code);
+  setText('region', data.region);
+  setText('city', data.city);
+  setText('timezone', data.timezone?.id || '–');
+  setText('local_time', data.timezone?.current_time || '–');
+  setText('asn', data.asn || '–');
+  setText('org', data.org || '–');
+  setText('isp', data.connection?.isp || data.isp || '–');
+  setText('asname', data.connection?.asn_org || data.connection?.asname || '–');
+  setText('currency_code', data.currency?.code || '–');
+  setText('currency', data.currency?.name || '–');
+  setText('coords', `${data.latitude}, ${data.longitude}`);
+  setText('hostname', data.hostname || '–');
+
+  // Threat Intelligence
+  if (data.threat) {
+    const t = [];
+    if (data.threat.is_tor) t.push('TOR');
+    if (data.threat.is_proxy) t.push('Proxy');
+    if (data.threat.is_known_attacker) t.push('Attacker');
+    if (data.threat.is_known_abuser) t.push('Abuser');
+    if (data.threat.is_threat) t.push('Threat');
+    setText('threat', t.length ? t.join(', ') : 'нет');
   }
 }
 
-async function fetchGeoInfo(ip) {
-  const url = `https://ipapi.co/${ip}/json/`;
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const d = await res.json();
-
-    // Базовые локационные поля
-    document.getElementById('country').textContent = d.country_name || '—';
-    document.getElementById('country_code').textContent = d.country_code || '—';
-    document.getElementById('continent_code').textContent = d.continent_code || '—';
-    document.getElementById('region').textContent = d.region || '—';
-    document.getElementById('city').textContent = d.city || '—';
-    document.getElementById('timezone').textContent = d.timezone || '—';
-
-    // Провайдер и сеть
-    document.getElementById('org').textContent = d.org || '—';
-    document.getElementById('network').textContent = d.network || '—';
-    document.getElementById('reverse').textContent = d.reverse || '—';
-    document.getElementById('currency').textContent = d.currency || '—';
-
-    // Threat Intelligence (если есть)
-    if (d.threat && Object.keys(d.threat).length) {
-      // собрать все флаги угроз в одну строку
-      const flags = Object.entries(d.threat)
-        .filter(([_, v]) => v === true)
-        .map(([k]) => k)
-        .join(', ');
-      document.getElementById('threat').textContent = flags || 'нет известных угроз';
-    } else {
-      document.getElementById('threat').textContent = '—';
-    }
-
-    // ASN
-    if (d.asn) {
-      document.getElementById('asn').textContent = `${d.asn} (${d.org || ''})`;
-    } else if (d.network) {
-      document.getElementById('asn').textContent = d.network;
-    } else {
-      document.getElementById('asn').textContent = '—';
-    }
-
-  } catch (err) {
-    console.error(err);
-    document.getElementById('threat').textContent = 'ошибка';
-    document.getElementById('asn').textContent = 'ошибка';
-  }
+function rtcLeak() {
+  return new Promise((resolve) => {
+    const ips = new Set();
+    const pc = new RTCPeerConnection({ iceServers: [] });
+    pc.createDataChannel('');
+    pc.onicecandidate = ev => {
+      if (!ev.candidate) {
+        pc.close();
+        resolve(Array.from(ips));
+        return;
+      }
+      const parts = ev.candidate.candidate.split(' ');
+      const ip = parts[4];
+      if (ip.match(/(\d{1,3}\.){3}\d{1,3}/)) ips.add(ip);
+    };
+    pc.createOffer()
+      .then(o => pc.setLocalDescription(o))
+      .catch(() => resolve([]));
+  });
 }
