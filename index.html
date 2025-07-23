@@ -4,29 +4,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>IP и геоинформация</title>
+  <title>IP, локация и система</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Информация об IP</h1>
+    <h1>Информация о вашем соединении</h1>
     <div class="info">
-      <p><strong>IPv4:</strong> <span id="ipv4">загрузка…</span></p>
-      <p><strong>IPv6:</strong> <span id="ipv6">загрузка…</span></p>
-      <hr>
-      <p><strong>Страна:</strong> <span id="country">—</span> (<span id="country_code">—</span>)</p>
-      <p><strong>Континент:</strong> <span id="continent_code">—</span></p>
-      <p><strong>Регион:</strong> <span id="region">—</span></p>
-      <p><strong>Город:</strong> <span id="city">—</span></p>
-      <p><strong>Часовой пояс:</strong> <span id="timezone">—</span></p>
-      <hr>
-      <p><strong>Провайдер (ISP):</strong> <span id="org">—</span></p>
-      <p><strong>Сеть:</strong> <span id="network">—</span></p>
-      <p><strong>Reverse DNS:</strong> <span id="reverse">—</span></p>
-      <p><strong>Локальная валюта:</strong> <span id="currency">—</span></p>
-      <hr>
-      <p><strong>Threat Intelligence:</strong> <span id="threat">—</span></p>
-      <p><strong>ASN:</strong> <span id="asn">—</span></p>
+      <p><strong>IPv4:</strong> <span id="ipv4">…</span></p>
+      <p><strong>IPv6:</strong> <span id="ipv6">…</span></p>
+      <p><strong>Страна:</strong> <span id="country">–</span> (<span id="country_code">–</span>)</p>
+      <p><strong>Континент:</strong> <span id="continent">–</span> (<span id="continent_code">–</span>)</p>
+      <p><strong>Регион:</strong> <span id="region">–</span></p>
+      <p><strong>Город:</strong> <span id="city">–</span></p>
+      <p><strong>Часовой пояс:</strong> <span id="timezone">–</span></p>
+      <p><strong>Местное время:</strong> <span id="local_time">–</span></p>
+      <p><strong>ASN:</strong> <span id="asn">–</span> (<span id="org">–</span>)</p>
+      <p><strong>Провайдер (ISP):</strong> <span id="isp">–</span></p>
+      <p><strong>Автономная система:</strong> <span id="asname">–</span></p>
+      <p><strong>Код валюты:</strong> <span id="currency_code">–</span></p>
+      <p><strong>Валюта:</strong> <span id="currency">–</span></p>
+      <p><strong>Координаты:</strong> <span id="coords">–</span></p>
+      <p><strong>Hostname:</strong> <span id="hostname">–</span></p>
+      <p><strong>Threat Intelligence:</strong> <span id="threat">–</span></p>
+
+      <h2>Устройство и система</h2>
+      <p><strong>Устройство / Браузер / ОС:</strong><br/>
+         <span id="ua">–</span>
+      </p>
+      <p><strong>Разрешение экрана:</strong> <span id="resolution">–</span></p>
+      <p><strong>Тип соединения:</strong> <span id="connection">–</span></p>
+
+      <h2>WebRTC Leak Test</h2>
+      <p><span id="webrtc">–</span></p>
+
+      <h2>Не реализовано (браузерные ограничения)</h2>
+      <ul>
+        <li>DNS Leak Test</li>
+        <li>TCP/IP Fingerprint</li>
+        <li>TLS Fingerprint</li>
+        <li>HTTP/2 Fingerprint</li>
+        <li>HTTP Headers</li>
+        <li>IP Address Whois</li>
+      </ul>
     </div>
   </div>
 
