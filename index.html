@@ -1,53 +1,25 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Полная информация о вашем IP и устройстве</title>
+  <title>IP Информация</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Информация о вашем IP и устройстве</h1>
+    <h1>Информация об IP</h1>
     <div class="info">
-      <!-- Сетевые данные -->
       <p><strong>IPv4:</strong> <span id="ipv4">загрузка…</span></p>
       <p><strong>IPv6:</strong> <span id="ipv6">загрузка…</span></p>
-      <p><strong>Hostname:</strong> <span id="hostname">—</span></p>
-      <p><strong>Провайдер (ISP):</strong> <span id="isp">—</span></p>
-      <p><strong>Автономная система (ASN):</strong> <span id="asn">—</span></p>
-      <p><strong>Сеть (ORG):</strong> <span id="org">—</span></p>
-
-      <!-- Гео‑данные -->
-      <p><strong>Страна:</strong> <span id="country">—</span> (<span id="country_code">—</span>)</p>
-      <p><strong>Континент:</strong> <span id="continent">—</span> (<span id="continent_code">—</span>)</p>
+      <p><strong>Страна:</strong> <span id="country">—</span></p>
       <p><strong>Регион:</strong> <span id="region">—</span></p>
       <p><strong>Город:</strong> <span id="city">—</span></p>
-      <p><strong>Локальная валюта:</strong> <span id="currency">—</span></p>
-
-      <!-- Время -->
-      <p><strong>Часовой пояс:</strong> <span id="timezone">—</span></p>
-      <p><strong>Местное время:</strong> <span id="local_time">—</span></p>
-
-      <!-- Threat Intelligence -->
-      <p><strong>Угроза (TOR):</strong> <span id="threat_tor">—</span></p>
-      <p><strong>Proxy/Crawler:</strong> <span id="threat_proxy">—</span></p>
-      <p><strong>Уровень угрозы:</strong> <span id="threat_level">—</span></p>
-      <p><strong>Типы угроз:</strong> <span id="threat_types">—</span></p>
-
-      <!-- Клиентское устройство -->
-      <p><strong>Устройство:</strong> <span id="device">—</span></p>
-      <p><strong>Браузер:</strong> <span id="browser">—</span></p>
-      <p><strong>ОС:</strong> <span id="os">—</span></p>
-      <p><strong>Разрешение экрана:</strong> <span id="resolution">—</span></p>
-      <p><strong>Тип соединения:</strong> <span id="connection_type">—</span></p>
-
-      <!-- WebRTC Leak -->
-      <p><strong>WebRTC‑утечка:</strong></p>
-      <ul id="webrtc_list">
-        <li>загрузка…</li>
-      </ul>
+      <p><strong>WHOIS:</strong> <span id="whois">—</span></p>
+      <p><strong>Reverse DNS:</strong> <span id="reverse">—</span></p>
+      <p><strong>Открытые порты:</strong> <span id="ports">—</span></p>
+      <p><strong>VPN/Proxy/Tor:</strong> <span id="anon">—</span></p>
+      <p><strong>DNSBL (чёрные списки):</strong> <span id="dnsbl">—</span></p>
     </div>
   </div>
 
