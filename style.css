@@ -1,3 +1,4 @@
+/* style.css */
 body, html {
   margin: 0;
   padding: 0;
@@ -16,7 +17,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.4);
   padding: 20px;
 }
 h1 {
@@ -25,7 +26,5 @@ h1 {
 }
 .info p {
   margin: 8px 0;
-  font-size: 1rem;
-  max-width: 90%;
-  word-break: break-word;
+  font-size: 1.1rem;
 }
