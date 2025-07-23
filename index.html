@@ -1,24 +1,75 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Мои IP и локация</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Мульти-инструменты</title>
+  <!-- PureCSS for layout -->
+  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- CryptoJS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Ваш IP и местоположение</h1>
-    <div class="info">
-      <p><strong>IPv4:</strong> <span id="ipv4">загрузка…</span></p>
-      <p><strong>IPv6:</strong> <span id="ipv6">загрузка…</span></p>
+  <div class="sidebar">
+    <h2>Инструменты</h2>
+    <ul>
+      <li><a href="#hash" class="tab-link" data-target="hash">Хеш & Pwned</a></li>
+      <li><a href="#datediff" class="tab-link" data-target="datediff">Разница дат</a></li>
+      <li><a href="#converter" class="tab-link" data-target="converter">Конвертер $100</a></li>
+      <li><a href="#anon" class="tab-link" data-target="anon">Анонимность</a></li>
+      <li><a href="#ipgeo" class="tab-link" data-target="ipgeo">IP / Geo</a></li>
+    </ul>
+  </div>
+  <div class="main">
+    <!-- Хеш-генератор -->
+    <section id="hash" class="tab">
+      <h3>Калькулятор хешей + проверка утечек</h3>
+      <input type="text" id="hash-input" placeholder="Введите текст">
+      <button id="hash-btn" class="pure-button pure-button-primary">Генерировать</button>
+      <pre id="hash-output"></pre>
+    </section>
+    <!-- Разница дат -->
+    <section id="datediff" class="tab" style="display:none;">
+      <h3>Разница между датами</h3>
+      <label>Дата 1: <input type="date" id="date1"></label>
+      <label>Дата 2: <input type="date" id="date2"></label>
+      <select id="unit">
+        <option value="days">Дни</option>
+        <option value="hours">Часы</option>
+        <option value="minutes">Минуты</option>
+      </select>
+      <button id="date-btn" class="pure-button pure-button-primary">Рассчитать</button>
+      <p id="date-output"></p>
+    </section>
+    <!-- Конвертер -->
+    <section id="converter" class="tab" style="display:none;">
+      <h3>Что можно купить на $100 в ...</h3>
+      <select id="cur-select">
+        <option value="EUR">EUR</option>
+        <option value="JPY">JPY</option>
+        <option value="GBP">GBP</option>
+        <option value="RUB">RUB</option>
+      </select>
+      <button id="conv-btn" class="pure-button pure-button-primary">Конвертировать</button>
+      <p id="conv-output"></p>
+    </section>
+    <!-- Детектор анонимности -->
+    <section id="anon" class="tab" style="display:none;">
+      <h3>Детектор анонимности</h3>
+      <button id="anon-btn" class="pure-button pure-button-primary">Проверить</button>
+      <div id="anon-output"></div>
+    </section>
+    <!-- IP / Geo (из предыдущего проекта) -->
+    <section id="ipgeo" class="tab" style="display:none;">
+      <h3>Ваш IP и местоположение</h3>
+      <p><strong>IPv4:</strong> <span id="ipv4">...</span></p>
+      <p><strong>IPv6:</strong> <span id="ipv6">...</span></p>
       <p><strong>Страна:</strong> <span id="country">—</span></p>
       <p><strong>Регион:</strong> <span id="region">—</span></p>
       <p><strong>Город:</strong> <span id="city">—</span></p>
-    </div>
+    </section>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
