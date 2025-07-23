@@ -1,99 +1,34 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IP & Инструменты</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IP и геоинформация</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>IP Checker & Utility Suite</h1>
-    <nav>
-      <button data-target="ip-check">IP Checker</button>
-      <button data-target="currency">Конвертер Валют</button>
-      <button data-target="units">Конвертер Единиц</button>
-      <button data-target="hash">Хеш Генератор</button>
-      <button data-target="weather">Погода</button>
-      <button data-target="password">Генератор Паролей</button>
-      <button data-target="datediff">Разница Дат</button>
-    </nav>
-  </header>
-  <main>
-    <!-- IP Checker -->
-    <section id="ip-check" class="tab active">
-      <h2>IP Checker</h2>
+  <div class="container">
+    <h1>Информация об IP</h1>
+    <div class="info">
       <p><strong>IPv4:</strong> <span id="ipv4">загрузка…</span></p>
       <p><strong>IPv6:</strong> <span id="ipv6">загрузка…</span></p>
-      <p><strong>Страна:</strong> <span id="country">—</span></p>
+      <hr>
+      <p><strong>Страна:</strong> <span id="country">—</span> (<span id="country_code">—</span>)</p>
+      <p><strong>Континент:</strong> <span id="continent_code">—</span></p>
       <p><strong>Регион:</strong> <span id="region">—</span></p>
       <p><strong>Город:</strong> <span id="city">—</span></p>
-      <p><strong>ISP:</strong> <span id="isp">—</span></p>
+      <p><strong>Часовой пояс:</strong> <span id="timezone">—</span></p>
+      <hr>
+      <p><strong>Провайдер (ISP):</strong> <span id="org">—</span></p>
+      <p><strong>Сеть:</strong> <span id="network">—</span></p>
+      <p><strong>Reverse DNS:</strong> <span id="reverse">—</span></p>
+      <p><strong>Локальная валюта:</strong> <span id="currency">—</span></p>
+      <hr>
+      <p><strong>Threat Intelligence:</strong> <span id="threat">—</span></p>
       <p><strong>ASN:</strong> <span id="asn">—</span></p>
-      <p><strong>Timezone:</strong> <span id="timezone">—</span></p>
-    </section>
-
-    <!-- Currency Converter -->
-    <section id="currency" class="tab">
-      <h2>Конвертер Валют</h2>
-      <input type="number" id="amount" placeholder="Сумма" />
-      <select id="from-currency"></select>
-      →
-      <select id="to-currency"></select>
-      <button id="convert-currency">Конвертировать</button>
-      <p>Результат: <span id="currency-result">—</span></p>
-    </section>
-
-    <!-- Unit Converter -->
-    <section id="units" class="tab">
-      <h2>Конвертер Единиц</h2>
-      <input type="number" id="unit-value" placeholder="Значение" />
-      <select id="unit-from">
-        <option value="m_km">Метры → Километры</option>
-        <option value="kg_g">Килограммы → Граммы</option>
-        <option value="c_f">Celsius → Fahrenheit</option>
-      </select>
-      <button id="convert-units">Конвертировать</button>
-      <p>Результат: <span id="unit-result">—</span></p>
-    </section>
-
-    <!-- Hash Generator -->
-    <section id="hash" class="tab">
-      <h2>Хеш Генераторы</h2>
-      <textarea id="hash-input" placeholder="Введите текст"></textarea>
-      <button data-algo="MD5" class="gen-hash">MD5</button>
-      <button data-algo="SHA-1" class="gen-hash">SHA-1</button>
-      <button data-algo="SHA-256" class="gen-hash">SHA-256</button>
-      <p>Хеш: <span id="hash-result">—</span></p>
-    </section>
-
-    <!-- Weather Demo -->
-    <section id="weather" class="tab">
-      <h2>Погода (Шадринск)</h2>
-      <button id="load-weather">Обновить</button>
-      <p><strong>Температура:</strong> <span id="weather-temp">—</span>℃</p>
-      <p><strong>Условия:</strong> <span id="weather-desc">—</span></p>
-    </section>
-
-    <!-- Password Generator -->
-    <section id="password" class="tab">
-      <h2>Генератор Паролей</h2>
-      <input type="number" id="pwd-length" placeholder="Длина" min="6" max="64" />
-      <button id="gen-password">Создать</button>
-      <p>Пароль: <span id="password-result">—</span></p>
-      <button id="check-pwned">Проверить в Pwned</button>
-      <p>Статус: <span id="pwned-result">—</span></p>
-    </section>
-
-    <!-- Date Difference -->
-    <section id="datediff" class="tab">
-      <h2>Калькулятор Разницы Дат</h2>
-      <input type="date" id="date-from" />
-      <input type="date" id="date-to" />
-      <button id="calc-diff">Вычислить</button>
-      <p>Разница: <span id="date-diff-result">—</span> дней</p>
-    </section>
-  </main>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
