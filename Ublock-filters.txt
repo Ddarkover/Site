@@ -1,2 +1,0 @@
-sex-studentki.*#@#+js(remove-node-text, script, /initTeasers|initVads/)
-sex-studentki.*##+js(remove-node-text, script, /initVads/)
